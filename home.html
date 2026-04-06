@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Trang chủ | Blog Tin Tức{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4 text-center fw-bold text-secondary">Danh sách Bài viết</h2>
+
+    <div class="row">
+        {% if DANHSACH_BAIVIET %}
+            
+            {% for bai_viet in DANHSACH_BAIVIET %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0 card-bai-viet">
+                    
+                    {% if bai_viet.HINHANH %}
+                        <img src="{{ bai_viet.HINHANH.url }}" class="card-img-top" alt="{{ bai_viet.TITLE }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <span class="fs-5 fw-bold text-uppercase">{{ bai_viet.BAIVIET.NAME }}</span>
+                        </div>
+                    {% endif %}
+    
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">
+                            <a href="{% url 'post_detail' bai_viet.id %}" class="text-decoration-none text-primary stretched-link">
+                                {{ bai_viet.TITLE }}
+                            </a>
+                        </h4>
+                        
+                        <p class="card-text text-muted mb-1 mt-2">Danh mục: <strong>{{ bai_viet.BAIVIET.NAME }}</strong></p>
+                        <p class="card-text text-muted small mb-3">Tác giả: {{ bai_viet.TACGIA }} | Ngày đăng: {{ bai_viet.NGAYDANG|date:"d/m/Y" }}</p>
+
+                        <div class="row mt-auto pt-3 border-top position-relative" style="z-index: 2;">
+                            <div class="col-6 pe-1">
+                                <a href="#" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold" role="button">Sửa</a>
+                            </div>
+                            <div class="col-6 ps-1">
+                                <a href="#" class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-bold" role="button">Xóa</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        {% else %}
+            <div class="col-12 text-center mt-5">
+                <h3 class="text-danger fw-bold">Không tìm thấy bài viết nào khớp với "{{ TU_KHOA }}"</h3>
+                <p class="text-muted">Vui lòng thử lại bằng một từ khóa khác nhé!</p>
+                <a href="/" class="btn btn-outline-primary mt-3 rounded-pill">Quay lại trang chủ</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
