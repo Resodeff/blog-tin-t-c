@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+db.sqlite3
+local_settings.py
+media/
+staticfiles/
+
+# Môi trường ảo (Venv)
+venv/
+env/
+.env
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
