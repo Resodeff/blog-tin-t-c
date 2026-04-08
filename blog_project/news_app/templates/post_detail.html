@@ -22,18 +22,35 @@
                     Tác giả: <strong>{{ BAIVIET.TACGIA }}</strong> | 
                     Danh mục: <strong>{{ BAIVIET.BAIVIET.NAME }}</strong> | 
                     Đăng lúc: {{ BAIVIET.NGAYDANG|date:"d/m/Y H:i" }}
-                </p>
+                </p>        
                 
                 {% if BAIVIET.HINHANH %}
                     <div class="text-center mb-4">
                         <img src="{{ BAIVIET.HINHANH.url }}" alt="{{ BAIVIET.TITLE }}" class="img-fluid rounded shadow-sm" style="max-height: 500px; width: 100%; object-fit: cover;">
                     </div>
                 {% endif %}
+                
                 <div class="mt-4 fs-5 text-dark" style="line-height: 1.8; text-align: justify;">
                     {{ BAIVIET.CONTENT|linebreaks }}
                 </div>
                 
-            </div>
+                <div class="mt-5 pt-4 border-top">
+                    <h4 class="fw-bold mb-4">Bình luận của bạn</h4>
+                    
+                    <form action="#" method="POST">
+                        
+                        <div class="mb-3">
+                            <textarea class="form-control bg-light" id="commentContent" name="content" rows="4" placeholder="Chia sẻ suy nghĩ của bạn về bài viết này..." style="resize: none; border-radius: 10px; border: 1px solid #dee2e6;"></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end">
+                            <button type="reset" class="btn btn-light px-4 rounded-pill fw-bold me-2 border">Hủy</button>
+                            <button type="submit" class="btn btn-primary px-4 rounded-pill fw-bold">Gửi bình luận</button>
+                        </div>
+                        
+                    </form>
+                </div>
+                </div>
         </div>
     </div>
     
