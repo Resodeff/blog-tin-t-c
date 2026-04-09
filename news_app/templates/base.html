@@ -61,15 +61,21 @@
                             {% endfor %}
                         </ul>
                     </div>
-
-                    <form method="GET" action="/" class="d-flex mx-auto w-50 my-2 my-lg-0">
+    
+                    <form method="GET" action="/" class="d-flex mx-auto my-2 my-lg-0" style="width: 500px;">
                         <input class="form-control me-2 rounded-pill px-4" type="search" name="q" value="{{ TU_KHOA }}" placeholder="🔍 Nhập tiêu đề bài viết mà bạn muốn tìm..." aria-label="Search">
                         <button class="btn btn-custom rounded-pill px-4 fw-bold" type="submit">Tìm</button>
                     </form>
-
-                    <a class="nav-link px-2 ms-auto text-dark" href="#" role="button">
-                        <i class="bi bi-list fs-4"></i>
-                    </a>
+    
+                    <div class="d-flex align-items-center ms-auto">
+                        <a href="#" class="btn btn-success rounded-pill px-3 fw-bold me-3 shadow-sm d-flex align-items-center">
+                            <i class="bi bi-plus-circle-fill me-2"></i> Viết bài
+                        </a>
+                        
+                        <a class="nav-link px-2 text-dark" href="#" role="button">
+                            <i class="bi bi-list fs-4"></i>
+                        </a>
+                    </div>
                 </nav>
             </div>
         </div>
