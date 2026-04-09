@@ -125,3 +125,15 @@ main {
 .nav-link:hover .icon-home-red {
     transform: scale(1.15);
 }
+/* --- custom --- */
+.btn-custom {
+    background-color: #ffeb3b; /* Thay mã màu nền bạn muốn ở đây */
+    border: 2px solid #000000; /* Thay độ dày và mã màu viền ở đây */
+    color: #333; /* Màu chữ */
+  }
+  
+  /* Tùy chọn: Thêm hiệu ứng khi di chuột (hover) vào nút */
+  .btn-custom:hover {
+    background-color: #1063f1; 
+    color: white;
+  }

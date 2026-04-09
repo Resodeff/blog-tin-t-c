@@ -1,122 +1,57 @@
+{% extends "base.html" %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
-    <title>Blog Tin Tức</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-</head>
-<body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-        <div class="container">
+{% block title %}Trang chủ | Blog Tin Tức{% endblock %}
 
-            <a class="navbar-brand" href="/">
-                <img src="{% static 'images/cover.png' %}" alt="BA CHÀNG LÍNH NGỰ LÂM Logo" style="height: 75px; width: auto;">
-            </a>
-                        
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#thanhDieuHuong">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% block content %}
+    <h2 class="mb-4 text-center fw-bold text-secondary">Danh sách Bài viết</h2>
 
-            <div class="collapse navbar-collapse" id="thanhDieuHuong">
-                
-                <form method="GET" action="/" class="d-flex mx-auto w-50 my-2 my-lg-0">
-                    <input class="form-control me-2 rounded-pill px-4" type="search" 
-                           name="q" value="{{ TU_KHOA }}"
-                           placeholder="🔍 Nhập tiêu đề bài viết mà bạn muốn tìm..." aria-label="Search">
-                    <button class="btn btn-outline-info rounded-pill px-4 fw-bold" type="submit">Tìm</button>
-                </form>
-
-                <div class="d-flex gap-2">
-                    <a href="#" class="btn btn-outline-light rounded-pill px-3">Đăng nhập</a>
-                    <a href="#" class="btn btn-primary rounded-pill px-3">Đăng ký</a>
-                    </div>
-            </div>
-        </div>
-    </nav>
-
-    <header>
-        <div class="sticky-top shadow-sm" style="top: 0px; z-index: 1030; background-color: rgba(103, 152, 183, 0.98); backdrop-filter: blur(5px); border-bottom: 1px solid #eee;">
-            <div class="container">
-                <nav class="nav nav-danh-muc d-flex flex-nowrap overflow-auto align-items-center py-2">
+    <div class="row">
+        {% if DANHSACH_BAIVIET %}
+            
+            {% for bai_viet in DANHSACH_BAIVIET %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0 card-bai-viet">
                     
-                    <a class="nav-link px-2" href="/">
-                        <i class="bi bi-house-door-fill fs-5 icon-home-red"></i>
-                    </a>
-                    
-                    <a class="nav-link fw-bold text-uppercase px-3" href="#">Mới nhất</a>
-                    <a class="nav-link fw-bold text-uppercase px-3" href="#">Xem nhiều</a>
-    
-                    {% for danh_muc in LIST_DANHMUC %}
-                        <a class="nav-link fw-bold text-uppercase px-3" href="#">
-                            {{ danh_muc.NAME }}
-                        </a>
-                    {% endfor %}
-                    
-                    <a class="nav-link px-2 ms-auto text-dark" href="#" role="button">
-                        <i class="bi bi-list fs-4"></i>
-                    </a>
-                    
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <main class="container">
-
-        <h2 class="mb-4 text-center fw-bold text-secondary">Danh sách Bài viết</h2>
-
-        <div class="row">
-            {% if DANHSACH_BAIVIET %}
-                
-                {% for bai_viet in DANHSACH_BAIVIET %}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0 card-bai-viet">
-                        
-                        {% if bai_viet.HINHANH %}
-                            <img src="{{ bai_viet.HINHANH.url }}" class="card-img-top" alt="{{ bai_viet.TITLE }}" style="height: 200px; object-fit: cover;">
-                        {% else %}
-                            <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
-                                <span class="fs-5 fw-bold text-uppercase">{{ bai_viet.BAIVIET.NAME }}</span>
-                            </div>
-                        {% endif %}
-        
-                        <div class="card-body d-flex flex-column">
-                            <h4 class="card-title fw-bold">
-                                <a href="{% url 'post_detail' bai_viet.id %}" class="text-decoration-none text-primary stretched-link">
-                                    {{ bai_viet.TITLE }}
-                                </a>
-                            </h4>
-                            
-                            <p class="card-text text-muted mb-1 mt-2">Danh mục: <strong>{{ bai_viet.BAIVIET.NAME }}</strong></p>
-                            <p class="card-text text-muted small mb-3">Tác giả: {{ bai_viet.TACGIA }} | Ngày đăng: {{ bai_viet.NGAYDANG|date:"d/m/Y" }}</p>
+                    {% if bai_viet.HINHANH %}
+                        <img src="{{ bai_viet.HINHANH.url }}" class="card-img-top" alt="{{ bai_viet.TITLE }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <span class="fs-5 fw-bold text-uppercase">{{ bai_viet.BAIVIET.NAME }}</span>
                         </div>
+                    {% endif %}
+    
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">
+                            <a href="{% url 'post_detail' bai_viet.id %}" class="text-decoration-none text-primary stretched-link">
+                                {{ bai_viet.TITLE }}
+                            </a>
+                        </h4>
+                        
+                        <p class="card-text text-muted mb-1 mt-2">Danh mục: <strong>{{ bai_viet.BAIVIET.NAME }}</strong></p>
+                        <p class="card-text text-muted small mb-3">Tác giả: {{ bai_viet.TACGIA }} | Ngày đăng: {{ bai_viet.NGAYDANG|date:"d/m/Y" }}</p>
+
+                        <div class="row mt-auto pt-3 border-top position-relative" style="z-index: 2;">
+                            <div class="col-6 pe-1">
+                                <a href="#" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold" role="button">Sửa</a>
+                            </div>
+                            <div class="col-6 ps-1">
+                                <a href="#" class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-bold" role="button">Xóa</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
 
-            {% else %}
-                <div class="col-12 text-center mt-5">
-                    <h3 class="text-danger fw-bold">Không tìm thấy bài viết nào khớp với "{{ TU_KHOA }}"</h3>
-                    <p class="text-muted">Vui lòng thử lại bằng một từ khóa khác nhé!</p>
-                    <a href="/" class="btn btn-outline-primary mt-3 rounded-pill">Quay lại trang chủ</a>
-                </div>
-            {% endif %}
-        </div>
-    </main>
-
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2026 BLOG. Được điều hành bởi BA CHÀNG LÍNH NGỰ LÂM</p>
-    </footer> 
-
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        {% else %}
+            <div class="col-12 text-center mt-5">
+                <h3 class="text-danger fw-bold">Không tìm thấy bài viết nào khớp với "{{ TU_KHOA }}"</h3>
+                <p class="text-muted">Vui lòng thử lại bằng một từ khóa khác nhé!</p>
+                <a href="/" class="btn btn-outline-primary mt-3 rounded-pill">Quay lại trang chủ</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

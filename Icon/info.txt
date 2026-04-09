@@ -10,5 +10,5 @@ font author site: https://www.mikeabbink.com/
 icon designer: undefined
 icon designer link: undefined
         
-{"bg":"#DDEBFB","icon-gradient-0":"#E90DDA","icon-gradient-1":"#15CFF1","font":"#262C4C","slogan":"#3a4060"}
+{"icon-gradient-0":"#E90DDA","font":"#262C4C","bg":"#DDEBFB","slogan":"#3a4060","icon-gradient-1":"#15CFF1"}
       
