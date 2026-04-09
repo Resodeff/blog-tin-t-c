@@ -76,7 +76,10 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse('postgresql://team_4changlinhngulam_user:ldyLwybXVOATmulnlBx5CAmiBTjHR2rU@dpg-d7b65rffte5s73d5ikj0-a.singapore-postgres.render.com/team_4changlinhngulam')
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600 # Giúp tối ưu kết nối với Render Database
+    )
 }
 
 
