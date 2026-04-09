@@ -1,0 +1,13 @@
+--- Cách push code ---
+git remote -v : xem dường dẫn [Ví dụ: git checkout DangNhap_DangKy]
+git branch : xem mình đang ở nhánh nào
+git fetch : xem các nhánh đang có
+git checkout <tên_nhánh_của_bạn> : vào nhánh của mình
+git add . : thêm tất cả
+git commit -m "Ghi chú ngắn gọn bạn vừa làm gì vào đây" : ghi chú rằng mình đã thay đổi cái gì
+git push origin <tên_nhánh_đang_đứng> : đẩy code lên đúng nhánh của mình
+[Ví dụ: git push origin DangNhap_DangKy]
+
+--- Câu lệnh Django ---
+python manage.py makemigrations : khai báo khi thay đổi file model
+python manage.py migrate : cập nhật vào Database (đồng bộ)
