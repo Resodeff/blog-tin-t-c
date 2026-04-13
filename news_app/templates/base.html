@@ -35,7 +35,10 @@
                     <span class="text-white d-flex align-items-center me-2">
                         Xin chào, {{ user.username }}
                     </span>
-                    <a href="{% url 'logout' %}" class="btn btn-danger rounded-pill px-3">Đăng xuất</a>
+                    <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Đăng xuất</button>
+                    </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-outline-light rounded-pill px-3">Đăng nhập</a>
                     <a href="{% url 'register' %}" class="btn btn-primary rounded-pill px-3">Đăng ký</a>

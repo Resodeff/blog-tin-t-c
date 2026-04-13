@@ -132,8 +132,62 @@ main {
     color: #333; /* Màu chữ */
   }
   
+  /* code của truyền ở đây */
+
   /* Tùy chọn: Thêm hiệu ứng khi di chuột (hover) vào nút */
   .btn-custom:hover {
     background-color: #1063f1; 
     color: white;
   }
+
+  body {
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+}
+
+.card {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Glass effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Input focus */
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+}
+
+/* Animation */
+.card {
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================= */
