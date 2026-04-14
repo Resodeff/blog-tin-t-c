@@ -1,0 +1,50 @@
+﻿{% extends "base.html" %}
+
+{% block title %}{{ TIEU_DE_TRANG }} | Blog Tin Tuc{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="fw-bold mb-3">{{ TIEU_DE_TRANG }}</h2>
+                    <p class="text-muted mb-4">Bạn đang đăng bài bằng tài khoản <strong>{{ user.username }}</strong>.</p>
+
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.non_field_errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <div class="form-text">{{ field.help_text }}</div>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small mt-1">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <div class="d-flex flex-wrap gap-2 pt-2">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">{{ TEN_NUT }}</button>
+                            {% if BAIVIET %}
+                                <a href="{% url 'post_detail' BAIVIET.id %}" class="btn btn-outline-secondary rounded-pill px-4">Hủy</a>
+                            {% else %}
+                                <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-pill px-4">Hủy</a>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

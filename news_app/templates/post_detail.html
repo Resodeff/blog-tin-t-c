@@ -1,0 +1,65 @@
+﻿{% extends "base.html" %}
+
+{% block title %}{{ BAIVIET.TITLE }} | Blog Tin Tuc{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <article class="bg-white p-4 p-md-5 shadow-sm rounded-4">
+                <div class="d-flex flex-wrap gap-2 justify-content-between align-items-start mb-3">
+                    <div>
+                        <p class="text-uppercase text-muted fw-semibold mb-2">{{ BAIVIET.BAIVIET.NAME }}</p>
+                        <h1 class="text-primary mb-3 fw-bold">{{ BAIVIET.TITLE }}</h1>
+                    </div>
+
+                    {% if CO_THE_QUAN_LY %}
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'post_update' BAIVIET.id %}" class="btn btn-outline-primary rounded-pill">Sửa bài</a>
+                            <a href="{% url 'post_delete' BAIVIET.id %}" class="btn btn-outline-danger rounded-pill">Xóa bài</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <p class="text-muted border-bottom pb-3 mb-4">
+                    Tác giả: <strong>{{ BAIVIET.TACGIA }}</strong>
+                    <span class="mx-2">|</span>
+                    Ngày đăng: {{ BAIVIET.NGAYDANG|date:"d/m/Y H:i" }}
+                    <span class="mx-2">|</span>
+                    Cập nhật: {{ BAIVIET.NGAYSUA|date:"d/m/Y H:i" }}
+                </p>
+
+                {% if BAIVIET.HINHANH %}
+                    <div class="text-center mb-4">
+                        <img src="{{ BAIVIET.HINHANH.url }}" alt="{{ BAIVIET.TITLE }}" class="img-fluid rounded-4 shadow-sm" style="max-height: 500px; width: 100%; object-fit: cover;">
+                    </div>
+                {% endif %}
+
+                {% if BAIVIET.THELOAI.all %}
+                    <div class="mb-4">
+                        {% for tag in BAIVIET.THELOAI.all %}
+                            <span class="badge text-bg-light border me-1">{{ tag.NAME }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="mt-4 fs-5 text-dark" style="line-height: 1.8; text-align: justify;">
+                    {{ BAIVIET.CONTENT|linebreaks }}
+                </div>
+
+                <div class="mt-5 pt-4 border-top d-flex flex-wrap gap-2">
+                    <a href="{% url 'home' %}" class="btn btn-dark rounded-pill">Quay lại trang chủ</a>
+                    {% if not CO_THE_QUAN_LY and user.is_authenticated %}
+                        <span class="text-muted align-self-center">Bạn không thể sửa hoặc xóa bài viết của người khác.</span>
+                    {% endif %}
+                </div>
+            </article>
+
+            <section class="bg-white p-4 shadow-sm rounded-4 mt-4">
+                <h4 class="fw-bold mb-3">Bình luận</h4>
+                <div class="alert alert-light border mb-0">
+                    Chức năng bình luận chưa được bật trong phiên bản này.
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}

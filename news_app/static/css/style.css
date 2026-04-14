@@ -1,0 +1,162 @@
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #212529;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+}
+
+.navbar.sticky-top {
+    top: 0;
+    z-index: 1030;
+    margin-top: 0;
+}
+
+header {
+    margin-top: 0;
+}
+
+/* --- main --- */
+main {
+    padding-top: 20px; 
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important; 
+    border-color: #0d6efd;
+}
+
+.btn-primary {
+    transition: all 0.2s;
+}
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+/* --- BÀI VIẾT --- */
+.card-bai-viet {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-bai-viet:hover {
+    transform: scale(1.02); 
+}
+
+.card-bai-viet:hover .card-title a {
+    color: #dc3545 !important; 
+}
+
+/* --- THANH MENU DANH MỤC KIỂU BÁO CHÍ --- */
+/* --- main --- */
+main {
+    padding-top: 20px; 
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important; 
+    border-color: #0d6efd;
+}
+
+.btn-primary {
+    transition: all 0.2s;
+}
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+/* --- BÀI VIẾT --- */
+.card-bai-viet {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-bai-viet:hover {
+    transform: scale(1.02); 
+}
+
+.card-bai-viet:hover .card-title a {
+    color: #dc3545 !important; 
+}
+
+/* --- THANH MENU DANH MỤC KIỂU BÁO CHÍ --- */
+.nav-danh-muc {
+    gap: 12px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.nav-danh-muc::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-danh-muc .nav-link {
+    color: #333333 !important;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 10px 16px !important;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+}
+
+.nav-danh-muc .nav-link:hover {
+    color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.04);
+    border-radius: 8px;
+}
+
+.nav-danh-muc .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #dc3545;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-danh-muc .nav-link:hover::after {
+    width: 50%;
+}
+
+.icon-home-red {
+    color: #dc3545 !important;
+    transition: transform 0.2s ease;
+}
+
+.nav-link:hover .icon-home-red {
+    transform: scale(1.15);
+}
+/* --- custom --- */
+.btn-custom {
+    background-color: #ffeb3b; /* Thay mã màu nền bạn muốn ở đây */
+    border: 2px solid #000000; /* Thay độ dày và mã màu viền ở đây */
+    color: #333; /* Màu chữ */
+  }
+  
+  /* Tùy chọn: Thêm hiệu ứng khi di chuột (hover) vào nút */
+  .btn-custom:hover {
+    background-color: #1063f1; 
+    color: white;
+  }
