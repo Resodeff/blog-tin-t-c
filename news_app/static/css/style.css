@@ -155,9 +155,10 @@ main {
     color: #333; /* Màu chữ */
   }
   
+  /* code của truyền ở đây */
+
   /* Tùy chọn: Thêm hiệu ứng khi di chuột (hover) vào nút */
 .btn-custom:hover {
     background-color: #1063f1; 
     color: white;
-}
-
+  }

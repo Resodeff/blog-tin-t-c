@@ -21,6 +21,7 @@ def user_can_manage_post(request, bai_viet):
     return request.user.is_authenticated and bai_viet.TACGIA_id == request.user.id
 
 
+# ====================== HOME ======================
 def home_view(request):
     tu_khoa = request.GET.get("q", "").strip()
 
@@ -37,6 +38,8 @@ def home_view(request):
     return render(request, "home.html", context)
 
 
+
+# ====================== CHI TIẾT ======================
 def post_detail(request, id):
     bai_viet = get_object_or_404(
         POST.objects.select_related("TACGIA", "BAIVIET").prefetch_related("THELOAI"),
@@ -53,50 +56,51 @@ def post_detail(request, id):
     return render(request, "post_detail.html", context)
 
 
+# ====================== LOGIN ======================
+# ====================== LOGIN ======================
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect('home')
 
-    redirect_to = request.POST.get("next") or request.GET.get("next") or reverse("home")
-    if not url_has_allowed_host_and_scheme(
-        redirect_to,
-        allowed_hosts={request.get_host()},
-        require_https=request.is_secure(),
-    ):
-        redirect_to = reverse("home")
+    error = None
 
-    form = DangNhapForm(request, data=request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        login(request, form.get_user())
-        messages.success(request, "Dang nhap thanh cong.")
-        return redirect(redirect_to)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    context = shared_context()
-    context.update({"form": form, "next": redirect_to})
-    return render(request, "registration/login.html", context)
+        user = authenticate(request, username=username, password=password)
 
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            error = '❌ Sai tên đăng nhập hoặc mật khẩu'
 
+    return render(request, 'login.html', {'error': error})
+
+# ====================== REGISTER ======================
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect('home')
 
-    form = DangKyForm(request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        user = form.save()
-        login(request, user)
-        messages.success(request, "Tao tai khoan thanh cong. Ban da duoc dang nhap.")
-        return redirect("home")
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()   # 👉 email sẽ được lưu nếu form đúng
+            return redirect('login')
+        else:
+            print(form.errors)
+    else:
+        form = RegisterForm()
 
-    context = shared_context()
-    context["form"] = form
-    return render(request, "registration/register.html", context)
+    return render(request, 'register.html', {'form': form})
 
 
 @login_required
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        messages.success(request, "Dang xuat thanh cong.")
+        messages.success(request, "Đăng xuất thành công")
     return redirect("home")
 
 @login_required

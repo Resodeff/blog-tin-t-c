@@ -3,28 +3,84 @@
 {% block title %}Đăng nhập{% endblock %}
 
 {% block content %}
-<div class="container d-flex justify-content-center">
-    <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
-        <h2 class="text-center mb-4">Đăng nhập</h2>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
 
-        {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
+                <!-- HEADER -->
+                <div class="bg-dark text-white text-center py-4">
+                    <h2 class="fw-bold mb-1">Chào mừng trở lại 👋</h2>
+                    <p class="mb-0 text-light">Đăng nhập để tiếp tục</p>
+                </div>
 
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label>Tên đăng nhập</label>
-                <input type="text" name="username" class="form-control" required>
+                <!-- BODY -->
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {% if error %}
+                            <div class="alert alert-danger rounded-3 text-center">
+                                {{ error }}
+                            </div>
+                        {% endif %}
+
+                        <!-- USERNAME -->
+                        <div class="form-floating mb-3">
+                            <input type="text" name="username" class="form-control rounded-3" id="username" placeholder="Tên đăng nhập" required>
+                            <label for="username">Tên đăng nhập</label>
+                        </div>
+
+                        <!-- PASSWORD -->
+                        <div class="form-floating mb-3 position-relative">
+                            <input type="password" name="password" class="form-control rounded-3 pe-5" id="password" placeholder="Mật khẩu" required>
+                            <label for="password">Mật khẩu</label>
+
+                            <!-- SHOW/HIDE -->
+                            <span onclick="togglePassword()" 
+                                  style="position:absolute; top:50%; right:15px; transform:translateY(-50%); cursor:pointer;">
+                                👁️
+                            </span>
+                        </div>
+
+                        <!-- REMEMBER + FORGOT -->
+                        <div class="d-flex justify-content-between align-items-center mb-4 small">
+                            <div>
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Ghi nhớ</label>
+                            </div>
+                            <a href="{% url 'password_reset' %}">Quên mật khẩu?</a>
+                        </div>
+
+                        <!-- BUTTON -->
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">
+                            Đăng nhập
+                        </button>
+                    </form>
+
+                    <!-- OR -->
+                    <div class="text-center my-4 text-muted">hoặc</div>
+
+                    <!-- REGISTER -->
+                    <div class="text-center">
+                        <span class="text-muted">Chưa có tài khoản?</span>
+                        <a href="{% url 'register' %}" class="fw-semibold text-decoration-none">
+                            Đăng ký ngay
+                        </a>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="mb-3">
-                <label>Mật khẩu</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-
-            <button type="submit" class="btn btn-dark w-100 rounded-pill">Đăng nhập</button>
-        </form>
+        </div>
     </div>
 </div>
+
+<!-- SCRIPT -->
+<script>
+function togglePassword() {
+    const password = document.getElementById("password");
+    password.type = password.type === "password" ? "text" : "password";
+}
+</script>
+
 {% endblock %}
