@@ -1,3 +1,26 @@
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #212529;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+}
+
+.navbar.sticky-top {
+    top: 0;
+    z-index: 1030;
+    margin-top: 0;
+}
+
+header {
+    margin-top: 0;
+}
+
 /* --- main --- */
 main {
     padding-top: 20px; 
@@ -133,7 +156,8 @@ main {
   }
   
   /* Tùy chọn: Thêm hiệu ứng khi di chuột (hover) vào nút */
-  .btn-custom:hover {
+.btn-custom:hover {
     background-color: #1063f1; 
     color: white;
-  }
+}
+
