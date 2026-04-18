@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import POST
+from .models import POST, COMMENT
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -33,50 +33,26 @@ class PostForm(forms.ModelForm):
             "HINHANH": forms.ClearableFileInput(attrs={"class": "form-control"}),
         }
 
-
-class DangKyForm(UserCreationForm):
-    username = forms.CharField(
-        label="Ten dang nhap",
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Nhap ten dang nhap"}
-        ),
-    )
-    password1 = forms.CharField(
-        label="Mat khau",
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Nhap mat khau"}
-        ),
-    )
-    password2 = forms.CharField(
-        label="Xac nhan mat khau",
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Nhap lai mat khau"}
-        ),
-    )
-
-    class Meta:
-        model = User
-        fields = ("username", "password1", "password2")
-
-
-class DangNhapForm(AuthenticationForm):
-    username = forms.CharField(
-        label="Ten dang nhap",
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Nhap ten dang nhap"}
-        ),
-    )
-    password = forms.CharField(
-        label="Mat khau",
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Nhap mat khau"}
-        ),
-    )
-
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = COMMENT
+        fields = ['NOIDUNG']
+        widgets = {
+            'NOIDUNG': forms.Textarea(attrs={
+                'class': 'form-control rounded-3',
+                'rows': 3,
+                'placeholder': 'Viết bình luận của bạn...',
+            }),
+            
+        }
+        labels = {
+            'NOIDUNG': ''
+        }
 

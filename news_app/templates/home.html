@@ -37,7 +37,7 @@
                             {% endif %}
 
                             <div class="d-flex gap-2 mt-auto pt-3 border-top position-relative" style="z-index: 2;">
-                                <a href="{% url 'post_detail' bai_viet.id %}" class="btn btn-outline-secondary btn-sm rounded-pill fw-bold flex-fill">Chi tiết</a>
+                                <a href="{% url 'post_detail' bai_viet.id %}" class="btn btn-outline-secondary btn-sm rounded-pill fw-bold flex-fill">Xem bài viết</a>
                                 {% if user.is_authenticated and user == bai_viet.TACGIA %}
                                     <a href="{% url 'post_update' bai_viet.id %}" class="btn btn-outline-primary btn-sm rounded-pill fw-bold flex-fill">Sửa</a>
                                     <a href="{% url 'post_delete' bai_viet.id %}" class="btn btn-outline-danger btn-sm rounded-pill fw-bold flex-fill">Xóa</a>

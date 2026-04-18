@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ BAIVIET.TITLE }} | Blog Tin Tuc{% endblock %}
 
@@ -42,24 +43,89 @@
                     </div>
                 {% endif %}
 
-                <div class="mt-4 fs-5 text-dark" style="line-height: 1.8; text-align: justify;">
+                <div class="mt-4 fs-5 text-dark" style="line-height: 1.8; text-align: justify;" >
                     {{ BAIVIET.CONTENT|linebreaks }}
                 </div>
-
-                <div class="mt-5 pt-4 border-top d-flex flex-wrap gap-2">
-                    <a href="{% url 'home' %}" class="btn btn-dark rounded-pill">Quay lại trang chủ</a>
-                    {% if not CO_THE_QUAN_LY and user.is_authenticated %}
-                        <span class="text-muted align-self-center">Bạn không thể sửa hoặc xóa bài viết của người khác.</span>
-                    {% endif %}
-                </div>
+                
             </article>
 
             <section class="bg-white p-4 shadow-sm rounded-4 mt-4">
-                <h4 class="fw-bold mb-3">Bình luận</h4>
-                <div class="alert alert-light border mb-0">
-                    Chức năng bình luận chưa được bật trong phiên bản này.
-                </div>
+                <h4 class="fw-bold mb-4" style="color: black;">Bình luận ({{ binh_luan.count }})</h4>
+
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'add_comment' BAIVIET.id %}" class="mb-4">
+                        {% csrf_token %}
+                        {{ comment_form.NOIDUNG }}
+                        <button type="submit" class="btn btn-primary rounded-pill mt-2">
+                            Gửi bình luận
+                        </button>
+                    </form>
+                {% else %}
+                    <div class="alert alert-light border mb-4">
+                        Vui lòng <a href="{% url 'login' %}?next={{ request.path }}">đăng nhập</a> để bình luận.
+                    </div>
+                {% endif %}
+
+                {% if binh_luan %}
+                    <div class="d-flex flex-column gap-3">
+                        {% for bl in binh_luan %}
+                            <div class="d-flex gap-3 p-3 border rounded-3 bg-light" id="comment-{{ bl.id }}">
+                                <div class="flex-shrink-0">
+                                    <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center fw-bold"
+                                        style="width:42px; height:42px; font-size:1.1rem;">
+                                        {{ bl.NGUOIBINHLUAN.username|first|upper }}
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <strong>{{ bl.NGUOIBINHLUAN.username }}</strong>
+                                        <small class="text-muted">{{ bl.NGAYBINHLUAN|date:"d/m/Y H:i" }}</small>
+                                    </div>
+
+                                    {# Chế độ xem #}
+                                    <p class="mb-0 comment-text-{{ bl.id }}">{{ bl.NOIDUNG }}</p>
+
+                                    {# Chế độ sửa (ẩn mặc định) #}
+                                    <textarea class="form-control mt-2 d-none comment-input-{{ bl.id }}"
+                                              rows="2">{{ bl.NOIDUNG }}</textarea>
+
+                                    {% if user == bl.NGUOIBINHLUAN or user.is_staff %}
+                                        <div class="mt-2 d-flex gap-2">
+                                            {% if user == bl.NGUOIBINHLUAN %}
+
+                                                {# Nút Sửa: hiện mặc định #}
+                                                <button class="btn btn-sm btn-outline-secondary rounded-pill"
+                                                        data-id="{{ bl.id }}"
+                                                        onclick="batDauSua(this.getAttribute('data-id'))">Sửa</button>
+
+                                                {# Nút Lưu: ẩn mặc định #}
+                                                    <button class="btn btn-sm btn-primary rounded-pill d-none"
+                                                        data-id="{{ bl.id }}"
+                                                        data-url="{% url 'edit_comment' bl.id %}"
+                                                        onclick="luuBinhLuan(this.getAttribute('data-id'), this.getAttribute('data-url'))">Lưu</button>
+                                                    
+                                                {# Nút Hủy: ẩn mặc định #}
+                                                    <button class="btn btn-sm btn-outline-secondary rounded-pill d-none"
+                                                            data-id="{{ bl.id }}"
+                                                            onclick="huyBinhLuan(this.getAttribute('data-id'))">Hủy</button>
+
+                                            {% endif %}
+
+                                            <a href="{% url 'delete_comment' bl.id %}"
+                                               class="btn btn-sm btn-outline-danger rounded-pill"
+                                               onclick="return confirm('Xóa bình luận này?')">Xóa</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">Chưa có bình luận nào. Hãy là người đầu tiên!</p>
+                {% endif %}
             </section>
         </div>
     </div>
+
+    <script src="{% static 'js/sctript.js' %}"></script>
 {% endblock %}
