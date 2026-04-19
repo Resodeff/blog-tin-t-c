@@ -11,45 +11,46 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-3" href="{% url 'home' %}">
-                <img src="{% static 'images/cover.png' %}" alt="Blog logo" style="height: 60px; width: auto;">
-                <span class="fw-bold text-uppercase">Blog Tin Tức</span>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#thanhDieuHuong">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="thanhDieuHuong">
-                <div class="d-none d-lg-block text-center flex-grow-1 mx-4">
-                    <h3 class="mb-0 fw-bold text-uppercase" style="color: #4db6fc;">Cập nhật bài viết mới mỗi ngày</h3>
-                </div>
-
-                <div class="d-flex align-items-center gap-2 ms-auto">
-                    {# Nút toggle sáng/tối #}
-                    <button id="theme-toggle" title="Đổi chế độ sáng/tối">
-                        <i class="bi bi-moon-fill" id="theme-icon"></i>
-                    </button>
-
-                    {% if user.is_authenticated %}
-                        <span class="text-white-50 small">Xin chào, {{ user.username }}</span>
-                        <form action="{% url 'logout' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-outline-light rounded-pill px-3">Đăng xuất</button>
-                        </form>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-outline-light rounded-pill px-3">Đăng nhập</a>
-                        <a href="{% url 'register' %}" class="btn btn-primary rounded-pill px-3">Đăng ký</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <header class="sticky-top">
-        <div class="header-inner shadow-sm"> {# 👈 dùng class header-inner thay style inline #}
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-3" href="{% url 'home' %}">
+                    <img src="{% static 'images/cover.png' %}" alt="Blog logo" style="height: 60px; width: auto;">
+                    <span class="fw-bold text-uppercase">Blog Tin Tức</span>
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#thanhDieuHuong">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="thanhDieuHuong">
+                    <div class="d-none d-lg-block text-center flex-grow-1 mx-4">
+                        <h3 class="mb-0 fw-bold text-uppercase" style="color: #4db6fc;">Cập nhật bài viết mới mỗi ngày</h3>
+                    </div>
+    
+                    <div class="d-flex align-items-center gap-2 ms-auto">
+                        {# Nút toggle sáng/tối #}
+                        <button id="theme-toggle" title="Đổi chế độ sáng/tối">
+                            <i class="bi bi-moon-fill" id="theme-icon"></i>
+                        </button>
+    
+                        {% if user.is_authenticated %}
+                            <span class="text-white-50 small">Xin chào, {{ user.username }}</span>
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-outline-light rounded-pill px-3">Đăng xuất</button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-outline-light rounded-pill px-3">Đăng nhập</a>
+                            <a href="{% url 'register' %}" class="btn btn-primary rounded-pill px-3">Đăng ký</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="header-inner shadow-sm">
             <div class="container">
                 <nav class="nav d-flex align-items-center flex-wrap py-2 gap-2">
                     <a class="nav-link px-2" href="{% url 'home' %}">
