@@ -1,0 +1,47 @@
+--- prompt tìm hiểu sâu ---
+
+Prompt 1: Định vị vai trò trong mô hình MVT
+"Tôi đang tìm hiểu file [tên_file.py] trong dự án Blog Tin Tức bằng Django. Dựa trên kiến trúc MVT (Model - View - Template), hãy phân tích:
+
+File này đang đóng vai trò gì (Model quản lý DB, View xử lý logic, Form kiểm duyệt dữ liệu, hay định tuyến URL)?
+
+Trách nhiệm cốt lõi của file này là gì đối với toàn bộ dự án?
+
+Trong file này có định nghĩa những Class (lớp) hay Function (hàm) chính nào? Giải thích ngắn gọn (1 câu) cho từng hàm/lớp."
+
+Prompt 2: Truy vết luồng dữ liệu M-V-T (Ai gọi ai?)
+"Hãy phân tích mối liên kết mạng lưới của file này với các thành phần khác trong dự án:
+
+Nếu đây là View: Nó đang Query (truy vấn) dữ liệu từ Model nào và truyền Context (biến dữ liệu) gì sang file HTML (Template) nào để hiển thị?
+
+Nếu đây là Model: Các trường (Fields) của nó đang có mối quan hệ (ForeignKey, ManyToMany) với Model nào khác? View nào đang gọi đến nó?
+
+Hãy phác họa một sơ đồ Text ngắn gọn luồng đi của dữ liệu liên quan đến file này: Request từ URL -> Gọi hàm nào trong file -> Tương tác Model nào -> Trả về Template HTML nào."
+
+Prompt 3: Đào sâu vào Database (ORM) và Cloudinary
+"Tập trung vào phần xử lý logic nghiệp vụ và lưu trữ trong file này:
+
+Tương tác Database (Django ORM): Hãy giải thích chi tiết các đoạn code truy vấn cơ sở dữ liệu (ví dụ: các hàm .filter(), .all(), .get(), .save()). Có logic nào phức tạp ở đây không?
+
+Tích hợp Cloudinary: Có đoạn code nào trong file này trực tiếp xử lý việc upload, lưu trữ, hoặc lấy đường dẫn ảnh (URL) từ Cloudinary không? Nó hoạt động từng bước như thế nào?
+
+Khi lưu thành công, dữ liệu được chuyển hướng (redirect) hay xử lý ra sao?"
+
+Prompt 4: Cầu nối Backend - Frontend (Giao tiếp với HTML/JS)
+"Hãy phân tích cách file Python này giao tiếp với giao diện người dùng (Frontend):
+
+Khi người dùng thao tác trên giao diện (ví dụ: bấm submit Form thêm bài viết, hoặc Search), file này hứng dữ liệu (POST/GET Request) từ giao diện như thế nào?
+
+Các biến dữ liệu (Context dictionary) nào được file này "đóng gói" để gửi sang cho file HTML?
+
+Frontend (Bootstrap/JS) sẽ dùng những biến này bằng thẻ template tags của Django (như {{ variable }} hoặc {% for %}) để render giao diện như thế nào?"
+
+Prompt 5: Rà soát bảo mật & Tối ưu cho môi trường Render
+"Đóng vai một Senior Django Developer, hãy đánh giá file code này với tiêu chuẩn deploy thực tế trên nền tảng Render:
+
+Bảo mật (Security): Code đã có các decorator như @login_required hay kiểm tra quyền sở hữu bài viết (người nào tạo mới được sửa/xóa) chưa?
+
+Hiệu năng: Có đoạn Query ORM nào dễ gây ra lỗi "N+1 Query" làm chậm cơ sở dữ liệu không (nên dùng select_related hoặc prefetch_related)?
+
+Code đã xử lý Try-Except tốt cho các trường hợp ngoại lệ (ví dụ: lỗi mất kết nối đến Cloudinary, không tìm thấy bài viết) chưa? Đề xuất 2-3 cách Refactor (tối ưu lại) để code gọn gàng và chuẩn PEP-8 hơn."
+
